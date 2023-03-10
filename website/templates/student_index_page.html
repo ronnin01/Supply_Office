@@ -1,90 +1,167 @@
 {%extends "layouts/students.html"%}
 {%block content%}
 
-    <!-- CAROUSEL FOR SPECIFIC ITEMS -->
-    <section class="slider-wrapper">
-        <div class="container">
-            <button class="slide-arrow" id="slide-arrow-prev">
-                <span>&#8249;</span>
-            </button>
-            
-            <button class="slide-arrow" id="slide-arrow-next">
-                <span>&#8250;</span>
-            </button>
-            
-            <ul class="slides-container" id="slides-container">
-                <li class="slide"></li>
-                <li class="slide"></li>
-                <li class="slide"></li>
-                <li class="slide"></li>
-            </ul>
+    <!-- MODAL -->
+    <div class="modal fade" id="borrow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-6 d-flex justify-content-center align-items-center" style="height: fit-content;">
+                        <img class="item-img-modal" src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
+                    </div>
+                    <div class="col-6">
+                        <div class="text-start my-2">
+                            <h2 class="fw-light">Logitech Webcam</h2>
+                            <span class="text-muted"><strong>Brand</strong>: Logitech</span>
+                            <br>
+                            <span class="text-muted"><strong>Model</strong>: h297fho23</span>
+                            <br>
+                            <span class="text-muted"><strong>Description</strong>: Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum excepturi blanditiis natus officiis eveniet nisi? A tempore nisi beatae. Quos, minus dignissimos. Et alias nihil accusantium ipsam sequi perferendis maiores saepe at eius nulla rerum, nam animi voluptatibus dolorem reiciendis culpa esse deserunt reprehenderit nesciunt eum unde! Eius incidunt quod consectetur error, nulla dignissimos totam quo officiis corrupti obcaecati. Sunt pariatur nesciunt eum perspiciatis quam qui animi facilis dolores rem?</span>
+                            <br>
+                            <span class="text-muted"><strong>Stock(s)</strong>: 5</span>
+                            <br>
+                            <span class="text-muted"><strong>Condition</strong>: Good</span>
+                            <br>
+                            <span class="text-muted"><Strong>Owner</Strong>: Arnold Batac</span>
+                            <br>
+                            <span class="text-muted"><strong>Location</strong>: Unified-ComLab Office</span>
+                        </div>
+                        <hr>
+                        <div class="my-2">
+                            <div class="my-2">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Purpose of borrow."               id="purpose-of-borrow" style="height: 100px"></textarea>
+                                    <label for="purpose-of-borrow">Purpose of borrow</label>
+                                </div>
+                            </div>
+                            <div class="my-2">
+                                <label class="form-label">Qty:</label>
+                                <input type="number" value="1" min="1" max="5" class="form-control" style="width: 100px;">
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="chkAgreement">
+                                <label class="form-check-label" for="chkAgreement">
+                                  By ticking, you are confirming that you have read, understand and agree to CTU <a href="">terms and conditions.</a>
+                                </label>
+                              </div>
+                            <div class="my-3 d-grid">
+                                <button class="btn btn-success">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <section class="container-fluid">
+        <div class="container py-3">
+            <div class="text-start my-2 d-flex justify-content-between">
+                <h3>Items</h3>
+                <div class="text-end">
+                    <select name="" id="" class="form-select">
+                        <option value="" selected>All Category</option>
+                        <option value="">Lights</option>
+                        <option value="">Speakers</option>
+                        <option value="">Keyboards</option>
+                        <option value="">Mouse</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="recommended-items">
+                <div href="/" class="recommended-items-card">
+                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
+                    <div class="text-start">
+                        <h4 class="fw-light">Logitech</h4>
+                        <span class="text-muted">Brand: Logitech</span><br>
+                        <span class="text-muted">Condition: Good</span><br>
+                        <span class="text-muted">Location: Engg Office</span><br>
+                        <span class="text-muted">Stock(s): 5</span>
+                    </div>
+                    <div class="d-grid my-2">
+                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#borrow">View Item</button>
+                    </div>
+                </div>
+                <div href="/" class="recommended-items-card">
+                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
+                    <div class="text-start">
+                        <h4 class="fw-light">Logitech</h4>
+                        <span class="text-muted">Brand: Logitech</span><br>
+                        <span class="text-muted">Condition: Good</span><br>
+                        <span class="text-muted">Location: Supply Office</span><br>
+                        <span class="text-muted">Stock(s): 5</span>
+                    </div>
+                    <div class="d-grid my-2">
+                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#borrow">Borrow</button>
+                    </div>
+                </div>
+                <div href="/" class="recommended-items-card">
+                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
+                    <div class="text-start">
+                        <h4 class="fw-light">Logitech</h4>
+                        <span class="text-muted">Brand: Logitech</span><br>
+                        <span class="text-muted">Condition: Good</span><br>
+                        <span class="text-muted">Location: COT Office</span><br>
+                        <span class="text-muted">Stock(s): 5</span>
+                    </div>
+                    <div class="d-grid my-2">
+                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#borrow">Borrow</button>
+                    </div>
+                </div>
+                <div href="/" class="recommended-items-card">
+                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
+                    <div class="text-start">
+                        <h4 class="fw-light">Logitech</h4>
+                        <span class="text-muted">Brand: Logitech</span><br>
+                        <span class="text-muted">Condition: Good</span><br>
+                        <span class="text-muted">Location: Admin Office</span><br>
+                        <span class="text-muted">Stock(s): 5</span>
+                    </div>
+                    <div class="d-grid my-2">
+                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#borrow">Borrow</button>
+                    </div>
+                </div>
+                <div href="/" class="recommended-items-card">
+                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
+                    <div class="text-start">
+                        <h4 class="fw-light">Logitech</h4>
+                        <span class="text-muted">Brand: Logitech</span><br>
+                        <span class="text-muted">Condition: Good</span><br>
+                        <span class="text-muted">Location: CoEd Office</span><br>
+                        <span class="text-muted">Stock(s): 5</span>
+                    </div>
+                    <div class="d-grid my-2">
+                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#borrow">Borrow</button>
+                    </div>
+                </div>
+                <div href="/" class="recommended-items-card">
+                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
+                    <div class="text-start">
+                        <h4 class="fw-light">Logitech</h4>
+                        <span class="text-muted">Brand: Logitech</span><br>
+                        <span class="text-muted">Condition: Good</span><br>
+                        <span class="text-muted">Location: ComLab Office</span><br>
+                        <span class="text-muted">Stock(s): 5</span>
+                    </div>
+                    <div class="d-grid my-2">
+                        <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#borrow">Borrow</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container my-2">
+            <div class="text-center">
+                <button class="btn btn-outline-success">Show More</button>
+            </div>
         </div>
     </section>
 
-    <section class="contaier-fluid bg-light">
-        <div class="container py-3">
-            <div class="text-start my-2">
-                <h2 class="">Categories</h2>
-            </div>
-            <div class="categories">
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/alto_speaker.jpg')}}" alt="">
-                    <div class="text-center">
-                        <span>Speaker</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/camera_cannon.jpg')}}" alt="">
-                    <div class="text-center">
-                        <span>Camera</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/keyboard.webp')}}" alt="">
-                    <div class="text-center">
-                        <span>Keyboard</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/mouse.webp')}}" alt="">
-                    <div class="text-center">
-                        <span>Mouse</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/monitor.jpg')}}" alt="">
-                    <div class="text-center">
-                        <span>Monitor</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/mixer.webp')}}" alt="">
-                    <div class="text-center">
-                        <span>Mixer</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/lights.jpg')}}" alt="">
-                    <div class="text-center">
-                        <span>Lights</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
-                    <div class="text-center">
-                        <span>Webcam</span>
-                    </div>
-                </a>
-                <a href="/" class="categories-card">
-                    <img src="{{url_for('static', filename='uploads/hdmi.png')}}" alt="">
-                    <div class="text-center">
-                        <span>Wire</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    
     <!-- RECOMMENDED ITEMS -->
     <section class="container-fluid">
         <div class="container py-3">
@@ -92,97 +169,49 @@
                 <h3 class="">Recommended Items</h3>
             </div>
             <div class="recommended-items">
-                <a href="/" class="recommended-items-card">
+                <div href="/" class="recommended-items-card">
                     <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
                     <div class="text-start">
                         <h4 class="fw-light">Rappoo webcam</h4>
                     </div>
-                </a>
-                <a href="/" class="recommended-items-card">
+                </div>
+                <div href="/" class="recommended-items-card">
                     <img src="{{url_for('static', filename='uploads/mouse.webp')}}" alt="">
                     <div class="text-start">
                         <h4 class="fw-light">Logitech Mouse</h4>
                     </div>
-                </a>
-                <a href="/" class="recommended-items-card">
+                </div>
+                <div href="/" class="recommended-items-card">
                     <img src="{{url_for('static', filename='uploads/mixer.webp')}}" alt="">
                     <div class="text-start">
                         <h4 class="fw-light">Yamaha 6slot mixer</h4>
                     </div>
-                </a>
-                <a href="/" class="recommended-items-card">
+                </div>
+                <div href="/" class="recommended-items-card">
                     <img src="{{url_for('static', filename='uploads/lights.jpg')}}" alt="">
                     <div class="text-start">
                         <h4 class="fw-light">RGB Sound Light</h4>
                     </div>
-                </a>
-                <a href="/" class="recommended-items-card">
+                </div>
+                <div href="/" class="recommended-items-card">
                     <img src="{{url_for('static', filename='uploads/camera_cannon.jpg')}}" alt="">
                     <div class="text-start">
                         <h4 class="fw-light">Canon EOD200S</h4>
+                        <span class="text-muted">Brand: Cannon</span><br>
+                        <span class="text-muted">Condition: Good</span><br>
+                        <span class="text-muted">Location: Supply Office</span><br>
+                        <span class="text-muted">Qty: 5</span>
                     </div>
-                </a>
-                <a href="/" class="recommended-items-card">
+                    <div class="d-grid my-2">
+                        <button class="btn btn-sm btn-success">Borrow</button>
+                    </div>
+                </div>
+                <div href="/" class="recommended-items-card">
                     <img src="{{url_for('static', filename='uploads/alto_speaker.jpg')}}" alt="">
                     <div class="text-start">
                         <h4 class="fw-light">Alto 500w Speaker</h4>
                     </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <div class="container">
-        <hr>
-    </div>
-    <section class="container-fluid">
-        <div class="container py-3">
-            <div class="text-start my-2">
-                <h3 class="">Items</h3>
-            </div>
-            <div class="recommended-items">
-                <a href="/" class="recommended-items-card">
-                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
-                    <div class="text-start">
-                        <h4 class="fw-light">Rappoo webcam</h4>
-                        <p class="text-muted">Qty: 20</p>
-                        <p class="text-muted"></p>
-                    </div>
-                </a>
-                <a href="/" class="recommended-items-card">
-                    <img src="{{url_for('static', filename='uploads/mouse.webp')}}" alt="">
-                    <div class="text-start">
-                        <h4 class="fw-light">Logitech Mouse</h4>
-                        <p class="text-muted">Qty: 5</p>
-                    </div>
-                </a>
-                <a href="/" class="recommended-items-card">
-                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
-                    <div class="text-start">
-                        <h4 class="fw-light">Rappoo webcam</h4>
-                        <p class="text-muted">Qty: 20</p>
-                    </div>
-                </a>
-                <a href="/" class="recommended-items-card">
-                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
-                    <div class="text-start">
-                        <h4 class="fw-light">Rappoo webcam</h4>
-                        <p class="text-muted">Qty: 20</p>
-                    </div>
-                </a>
-                <a href="/" class="recommended-items-card">
-                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
-                    <div class="text-start">
-                        <h4 class="fw-light">Rappoo webcam</h4>
-                        <p class="text-muted">Qty: 20</p>
-                    </div>
-                </a>
-                <a href="/" class="recommended-items-card">
-                    <img src="{{url_for('static', filename='uploads/webcam.webp')}}" alt="">
-                    <div class="text-start">
-                        <h4 class="fw-light">Rappoo webcam</h4>
-                        <p class="text-muted">Qty: 20</p>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>

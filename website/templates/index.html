@@ -1,80 +1,85 @@
-{%extends "layouts/admin.html"%}
+{%extends "layouts/admin.html"%} {% block title %}Item{% endblock %}
 {%block content%}
-    <section>
-        <div class="container p-3">
-            <div class="card border-top border-0 border-danger shadow-lg">
-                <div class="card-body">
-                    <div class="text-start my-2">
-                        <h2>ITEM ENTRY</h2>
-                    </div>
-                    <hr>
-                    <div class="my-2">
-                        <form method="POST">
-                            <div class="row">
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Item No.</label>
-                                    <input type="text" class="form-control" name="is_itemno" placeholder="Item No">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Serial No.</label>
-                                    <input type="text" class="form-control" placeholder="Serial No">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Item Name</label>
-                                    <input type="text" class="form-control" placeholder="Item Name">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Item Description</label>
-                                    <input type="text" class="form-control" placeholder="Item Description">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Category No.</label>
-                                    <input type="text" class="form-control" placeholder="Category No">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Brand</label>
-                                    <input type="text" class="form-control" placeholder="Brand">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Model</label>
-                                    <input type="text" class="form-control" placeholder="Model">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Location</label>
-                                    <input type="text" class="form-control" placeholder="Location">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Department</label>
-                                    <input type="text" class="form-control" placeholder="Department">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Owner</label>
-                                    <input type="text" class="form-control" placeholder="Owner">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Pic</label>
-                                    <input type="text" class="form-control" placeholder="Pic">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">BegStock</label>
-                                    <input type="text" class="form-control" placeholder="BegStock">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">Unit</label>
-                                    <input type="text" class="form-control" placeholder="Unit">
-                                </div>
-                                <div class="col-6 my-2">
-                                    <label class="form-label">User No.</label>
-                                    <input type="text" class="form-control" placeholder="UserNo">
-                                </div>
-                            </div>
-                            <div class="d-grid my-4">
-                                <button type="submit" class="btn btn-danger">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+
+
+<section>
+
+    <div class="container-fluid p-3">
+        <div class="card border-top border-0 border-danger shadow-lg">
+            <div class="card-body">
+                <div class="text-start my-2">
+                    <h4>ITEM LIST</h4>
+                </div>
+                <hr>
+                <div class="my-2 text-start">
+                    <a href="/admin/item/add"><button class="btn btn-sm btn-success" ><i class="bi bi-plus-circle"></i>   New Item</button></a> 
+                    
+                </div>
+                <div class="my-2" style="overflow-x: scroll;">
+                    <table class="table table-bordered">
+                        <!-- <style rel = 'stylesheet' type="text/css">
+                            tbody td {font-size: 80%;}
+                            thead {font-size: 90%;}
+                        </style> -->
+                        <thead>
+                            <tr class="text-center">
+                                <th> </th>
+                                <th>Pic</th>
+                                <th>Item Name</th>
+                                <th>Category</th>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Location</th>
+                                <th>Department</th>
+                                <th>Owner</th>               
+                                <th>Stock(s)</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {%if data == 0%}
+                                <tr class="text-center">
+                                    <td colspan="16">
+                                        <h3 class="fw-light">No Items</h3>
+                                    </td>
+                                </tr>
+                            {%else%}
+                                
+                                {%for item in items%}
+                                <tr>
+                                    <td>{{loop.index}}</td>
+                                    <td class="text-center">
+                                        <img class="img-thumbnail border-0" width="35px" height="30px" src="{{url_for('static', filename='uploads/')}}{{item.IS_Pic}}" width="35px" alt="">
+                                    </td>
+                                    <td>{{item.IS_ItemName}}</td>
+                                    <td>{{item.Cat_Name}}</td>
+                                    <td>{{item.Br_BrandName}}</td>
+                                    <td>{{item.IS_Model}}</td>
+                                    <td>{{item.Loc_Name}}</td>
+                                    <td>{{item.Dept_Name}}</td>
+                                    <td>{{item.UT_LastName + ', ' + item.UT_FirstName}}</td>
+                                    <td>{{item.IS_BegStock}}</td>
+                                    <td class="text-center">
+                                        <a href="" title="Edit Item" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="" title = "Delete Item" class="btn btn-danger btn-sm"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                                        <a href="" title = "Edit Stock(s)" class="btn btn-warning btn-sm"><i class="fa-sharp fa-solid fa-list-check"></i></a>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                                
+                            {%endif%}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </section>
-{%endblock%}
+    </div>
+</section>
+
+    
+
+
+
+    
+{% endblock %}

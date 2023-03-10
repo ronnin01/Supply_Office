@@ -1,0 +1,259 @@
+{%extends "layouts/admin.html"%} {% block title %}Item{% endblock %}
+{%block content%}
+
+<!-- MODALS -->
+    <!-- Modal -->
+    <!--<div class="modal fade" id="add-item" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+        <div id="add-category" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Category</h4>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+                            <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="container">
+                              <div class = "row">
+                                  <div class="col">
+                                      <div class="card">
+                                          <div class="card-body">
+                                              <div class="row">
+                                                  <div class="col">
+                                                      <!-- MODALS <center>
+                                                          <img width = "150px" id = "imgLogo" src="static/images/signup.png" alt = "Image"/>
+                                                      </center> -->
+                                                    <hr>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col">
+                                                      <center>
+                                                        <h4 align="center">ITEM CATEGORY</h4>
+                                                      </center>
+                                                  </div>
+                                              </div>
+    
+                                                <div class="row">
+                                                    <div class="col">
+                                                    <label for="txtCategory" class="form-label">Item Name</label>
+                                                    <input type="text" class="form-control" required
+                                                    id="txtCategory" name = "txtCategory" placeholder="Enter New Category">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <!-- Modal -->
+    <div class="modal fade" id="category" tabindex="-1" aria-labelledby="categoryLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="categoryLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{url_for('auth.categoryadd')}}" method="POST">
+              <div class="my-2">
+                <div class="text-start">
+                  <h2 class="fw-light">Add Category</h2>
+                </div>
+              </div>
+              <hr>
+              <div class="my-2">
+                <label class="form-label">Add Category</label>
+                <input type="text" class="form-control" name="category" placeholder="Category">
+              </div>
+              <div class="my-3 d-grid">
+                <button type="submit" class="btn btn-success">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+                                                
+      <!-- End of Modal -->
+    
+
+        <!--
+        <div class="container-fluid">
+        -->
+        <div class="modal fade" id="add-category" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"></div>
+            <div class="vh-100 row align-items-center">
+                <div class="col">
+                    <div class="row justify-content-center">
+                        <div class="col-11 col-md-8 col-lg-6 signup-animate">
+                            <div class="card shadow-lg">
+                                <div class="card-body">
+                                    <div class = "d-flex justify-content-between">
+                                        <div>
+                                            <h3>Add New Item</h3>
+                                        </div>
+                                        <div>
+                                            <a href="/admin/items/all"><button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+                                            <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+                                            </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    {% with messages = get_flashed_messages(with_categories=true) %}
+                                      {% if messages %}
+                                          {%for category, message in messages%}
+                                              {%if category == 'success'%}
+                                                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                      {{message}}
+                                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                  </div>
+                                              {% endif %}
+                                          {% endfor %}
+                                      {% endif %}
+                                  {% endwith %}
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <div class="container">
+                                          <div class="row">
+                                            <div class="col">
+                                            <label for="txtSerial" class="form-label">Serial No.</label>
+                                            <input type="text" class="form-control"
+                                            id="txtSerial" name = "txtSerial" placeholder="Enter S/N" style="width:300px;">
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                <label for="txtItemName" class="form-label">Item Name</label>
+                                                <input type="text" class="form-control" required
+                                                id="txtItemName" name = "txtItemName" placeholder="Enter Item Name">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                <textarea class="form-control" placeholder="Description" id="txtItemDesc" name="txtItemDesc" style="height: 100px"></textarea>
+                                                <br/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-md-4">
+                                              <label for="txtCategory" class="form-label">Category</label>
+                                              <select class= form-select name="txtCategory" id="txtCategory">
+                                                
+                                                <option>Select Category</option>
+                                                {%for category in categories%}
+                                                <option value="{{category.Cat_ID}}">{{category.Cat_Name}}</option>
+                                                {%endfor%}
+                                                <!-- <option ><a data-bs-toggle="modal" data-bs-target="#add-category">Add New Category</a></option>
+                                                -->
+                                                <option value="add">Add</option>
+                                            </select> 
+            
+                                            </div>
+            
+                                            <div class="col-md-4">
+                                              <label for="txtBrand" class="form-label">Designation</label>
+                                              <select class= form-select name="txtBrand" id="txtBrand" >
+                                                <option>Select Brand</option>
+                                                {%for brand in brands%}
+                                                <option value="{{brand.Br_BrandID}}">{{brand.Br_BrandName}}</option>
+                                                {%endfor%}
+                                               
+                                              </select>
+                                            </div>
+    
+                                            <div class="col-md-4">
+                                                <label for="txtModel" class="form-label">Model</label>
+                                                <input type="text" id="txtModel" name="txtModel" class="form-control">
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                              <label for="txtLocation" class="form-label">Location</label>
+                                              <select class= form-select name="txtLocation" id="txtLocation" >
+                                                <option selected>Select Location</option>
+                                                {%for location in locations%}
+                                                <option value="{{location.Loc_No}}">{{location.Loc_Name}}</option>
+                                                {%endfor%}
+                                              </select>
+                                            </div>
+    
+                                            <div class="col-md-6">
+                                                <label for="txtDepartment" class="form-label">Department</label>
+                                                <select class= form-select name="txtDepartment" id="txtDepartment" >
+                                                  <option selected>Select Department</option>
+                                                  {%for department in departments%}
+                                                <option value="{{department.Dept_No}}">{{department.Dept_Name}}</option>
+                                                {%endfor%}
+                                                </select>
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                  <label for="txtOwner" class="form-label">Owner</label>
+                                                  <select class= form-select name="txtOwner" id="txtOwner" >
+                                                    <option selected>Select Owner</option>
+                                                    {%for owner in users%}
+                                                    <option value="{{owner.UT_UserID}}">{{owner.UT_LastName + ', ' + owner.UT_FirstName}}</option>
+                                                    {%endfor%}
+                                                  </select>
+                                                </div>
+                                            </div>
+                                          <div class="row">
+                                      
+                                            <div class="col-md-4">
+                                              <label for="txtStocks" class="form-label">Initital Stock(s)</label>
+                                              <input type="number" id="txtStocks" name="txtStocks" value="1" min="1" class="form-control" style="width: 100px;">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="txtCondition" class="form-label">Condition</label>
+                                                <select class= form-select name="txtOwner" id="txtCondition" >
+                                                    <option selected>Select Condition</option>
+                                                    <option value="Good">Good</option>
+                                                    <option value="Defective">Defective</option>
+                                                    <option value="Not functional">Not functional</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="txtUnit" class="form-label">Unit</label>
+                                                <select class= form-select name="txtUnit" id="txtUnit" >
+                                                  <option selected>Select Unit</option>
+                                                  <option value="box">Box</option>
+                                                  <option value="pc">Piece</option>
+                                                </select>
+                                            </div>
+                                          </div>
+                                          <br />
+                                          <div class="row">
+                                            <div class="col">
+                                              <label for="imgItem" class="form-label" >Upload Item image (PNG, JPG)</label>
+                                              <input class = "form-control" type="file" id="imgItem" name = "imgItem"
+                                              accept=".jpg, .jpeg, .png" style="width: 50%;">
+                                            </div>
+                  
+                                          </div>
+                         
+                  
+                                        <br />
+                                        <button type="submit" class="btn btn-success w-100">Submit</button>
+                                      </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+{% endblock %}

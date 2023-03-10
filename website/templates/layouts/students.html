@@ -20,25 +20,36 @@
                 <img src="{{url_for('static', filename='images/ctu-logo.png')}}" width="35px" alt="">
                 Online Items Requisition
             </a>
-            <form style="width: 400px;">
+            <form style="width: 400px;" class="d-none d-md-block">
                 <div class="input-group flex-nowrap">
                     <input type="text" class="form-control" placeholder="Search Items" aria-label="Username" aria-describedby="addon-wrapping">
                     <span class="btn btn-danger input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
                 </div>
             </form>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
+            <i class="bi bi-list d-block d-lg-none h3" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></i>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown py-2">
+                        <form class="d-block d-md-none">
+                            <div class="input-group flex-nowrap">
+                                <input type="text" class="form-control" placeholder="Search Items" aria-label="Username" aria-describedby="addon-wrapping">
+                                <span class="btn btn-danger input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
+                            </div>
+                        </form>
+                    </li>
                     <li class="nav-item dropdown py-2">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Transactions
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Pending</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Current</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Borrowed</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Declined</a></li>
                         </ul>
                     </li>
@@ -48,20 +59,26 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Pending</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Current</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Borrowed</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Declined</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{url_for('static', filename='images/ctu-logo.png')}}" width="35px" alt="">
+                            <img class="rounded-circle" width="45px" height="40px" src="{{url_for('static', filename='uploads/')}}{{session['user_image']}}" width="35px" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Edit Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/signin">Logout</a></li>
+                            <li><a class="dropdown-item" href="/signout">Logout</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item py-3">
+                        <i class="bi bi-bell h5"></i>
                     </li>
                 </ul>
             </div>
@@ -70,21 +87,9 @@
     {%block content%}
     {%endblock%}
 
+    <!-- SCRIPT -->
     <script>
-        const slidesContainer = document.getElementById("slides-container");
-        const slide = document.querySelector(".slide");
-        const prevButton = document.getElementById("slide-arrow-prev");
-        const nextButton = document.getElementById("slide-arrow-next");
-
-        nextButton.addEventListener("click", () => {
-            const slideWidth = slide.clientWidth;
-            slidesContainer.scrollLeft += slideWidth;
-        });
-
-        prevButton.addEventListener("click", () => {
-            const slideWidth = slide.clientWidth;
-            slidesContainer.scrollLeft -= slideWidth;
-        });
+        
     </script>
 </body>
 </html>
